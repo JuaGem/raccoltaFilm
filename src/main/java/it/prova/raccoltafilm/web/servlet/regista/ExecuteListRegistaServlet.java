@@ -18,17 +18,17 @@ public class ExecuteListRegistaServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		try {
-		
+
 			String operationResult = request.getParameter("operationResult");
-			if(StringUtils.isNotBlank(operationResult) && operationResult.equalsIgnoreCase("SUCCESS"))
+			if (StringUtils.isNotBlank(operationResult) && operationResult.equalsIgnoreCase("SUCCESS"))
 				request.setAttribute("successMessage", "Operazione effettuata con successo");
 			if (StringUtils.isNotBlank(operationResult) && operationResult.equalsIgnoreCase("ERROR"))
 				request.setAttribute("errorMessage", "Attenzione si è verificato un errore.");
 			if (StringUtils.isNotBlank(operationResult) && operationResult.equalsIgnoreCase("NOT_FOUND"))
 				request.setAttribute("notFoundMessage", "Elemento non trovato.");
-			
+
 			request.setAttribute("registi_list_attribute",
 					MyServiceFactory.getRegistaServiceInstance().listAllElements());
 		} catch (Exception e) {
@@ -40,9 +40,10 @@ public class ExecuteListRegistaServlet extends HttpServlet {
 
 		request.getRequestDispatcher("/regista/list.jsp").forward(request, response);
 	}
-	
+
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String operationResult = request.getParameter("operationResult");
 		if (StringUtils.isNotBlank(operationResult) && operationResult.equalsIgnoreCase("SUCCESS"))
 			request.setAttribute("successMessage", "Operazione effettuata con successo");
@@ -50,10 +51,9 @@ public class ExecuteListRegistaServlet extends HttpServlet {
 			request.setAttribute("errorMessage", "Attenzione si è verificato un errore.");
 		if (StringUtils.isNotBlank(operationResult) && operationResult.equalsIgnoreCase("NOT_FOUND"))
 			request.setAttribute("errorMessage", "Elemento non trovato.");
-		
-		
+
 		try {
-		 
+
 			request.setAttribute("registi_list_attribute",
 					MyServiceFactory.getRegistaServiceInstance().listAllElements());
 		} catch (Exception e) {

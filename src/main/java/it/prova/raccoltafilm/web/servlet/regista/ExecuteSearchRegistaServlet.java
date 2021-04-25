@@ -45,8 +45,8 @@ public class ExecuteSearchRegistaServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		try {
 			request.setAttribute("registi_list_attribute",
@@ -59,6 +59,5 @@ public class ExecuteSearchRegistaServlet extends HttpServlet {
 		}
 		request.getRequestDispatcher("regista/list.jsp").forward(request, response);
 	}
-	
 
 }

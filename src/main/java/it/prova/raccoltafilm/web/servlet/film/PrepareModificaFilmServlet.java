@@ -10,18 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import it.prova.raccoltafilm.service.MyServiceFactory;
 
-
 @WebServlet("/PrepareModificaFilmServlet")
 public class PrepareModificaFilmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public PrepareModificaFilmServlet() {
-        super();
-    }
+
+	public PrepareModificaFilmServlet() {
+		super();
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 
 		String idParameter = request.getParameter("idFilm");
 
@@ -38,8 +36,8 @@ public class PrepareModificaFilmServlet extends HttpServlet {
 			request.getRequestDispatcher("film/search.jsp").forward(request, response);
 			return;
 		}
-		
-	    request.getRequestDispatcher("film/edit.jsp").forward(request, response);
+
+		request.getRequestDispatcher("film/edit.jsp").forward(request, response);
 
 	}
 

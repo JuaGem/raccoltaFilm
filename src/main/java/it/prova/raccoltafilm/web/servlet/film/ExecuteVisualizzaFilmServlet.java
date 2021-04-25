@@ -22,7 +22,7 @@ public class ExecuteVisualizzaFilmServlet extends HttpServlet {
 		String idFilmParam = request.getParameter("idFilm");
 
 		if (!NumberUtils.isCreatable(idFilmParam)) {
-			
+
 			request.setAttribute("errorMessage", "Attenzione si è verificato un errore.");
 			request.getRequestDispatcher("search.jsp").forward(request, response);
 			return;
@@ -41,7 +41,7 @@ public class ExecuteVisualizzaFilmServlet extends HttpServlet {
 
 			request.setAttribute("show_film_attr", filmInstance);
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
 			request.setAttribute("errorMessage", "Attenzione si è verificato un errore.");
 			request.getRequestDispatcher("home").forward(request, response);

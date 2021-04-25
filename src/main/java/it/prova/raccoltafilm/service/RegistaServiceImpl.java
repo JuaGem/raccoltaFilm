@@ -99,7 +99,7 @@ public class RegistaServiceImpl implements RegistaService {
 		EntityManager entityManager = LocalEntityManagerFactoryListener.getEntityManager();
 
 		try {
-			
+
 			entityManager.getTransaction().begin();
 
 			registaDAO.setEntityManager(entityManager);
@@ -122,13 +122,13 @@ public class RegistaServiceImpl implements RegistaService {
 
 		try {
 			entityManager.getTransaction().begin();
-			
+
 			registaDAO.setEntityManager(entityManager);
-			registaInstance = entityManager.merge(registaInstance); 
-			
-			if (!registaInstance.getFilms().isEmpty()) 
+			registaInstance = entityManager.merge(registaInstance);
+
+			if (!registaInstance.getFilms().isEmpty())
 				throw new Exception("Regista non eliminabile.");
-				
+
 			registaDAO.delete(registaInstance);
 
 			entityManager.getTransaction().commit();
@@ -148,7 +148,7 @@ public class RegistaServiceImpl implements RegistaService {
 		EntityManager entityManager = LocalEntityManagerFactoryListener.getEntityManager();
 
 		try {
-	
+
 			registaDAO.setEntityManager(entityManager);
 
 			return registaDAO.findByExample(example);

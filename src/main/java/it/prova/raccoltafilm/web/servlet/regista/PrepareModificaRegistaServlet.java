@@ -10,21 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import it.prova.raccoltafilm.service.MyServiceFactory;
 
-/**
- * Servlet implementation class PrepareModificaRegistaServlet
- */
 @WebServlet("/PrepareModificaRegistaServlet")
 public class PrepareModificaRegistaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-     
-    public PrepareModificaRegistaServlet() {
-        super();
-    }
 
-	 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public PrepareModificaRegistaServlet() {
+		super();
+	}
 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		String idParameter = request.getParameter("idRegista");
 
@@ -32,16 +27,16 @@ public class PrepareModificaRegistaServlet extends HttpServlet {
 
 			request.setAttribute("edit_regista_attribute",
 					MyServiceFactory.getRegistaServiceInstance().caricaSingoloElemento(Long.parseLong(idParameter)));
-		 
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("errorMessage", "Attenzione, si è verificato un errore.");
 			request.getRequestDispatcher("regista/search.jsp").forward(request, response);
 			return;
 		}
-		
-		 request.getRequestDispatcher("regista/edit.jsp").forward(request, response);
+
+		request.getRequestDispatcher("regista/edit.jsp").forward(request, response);
 
 	}
- 
+
 }

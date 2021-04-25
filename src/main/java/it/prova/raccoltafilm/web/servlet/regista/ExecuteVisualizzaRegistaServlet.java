@@ -15,12 +15,13 @@ import it.prova.raccoltafilm.service.MyServiceFactory;
 @WebServlet("/ExecuteVisualizzaRegistaServlet")
 public class ExecuteVisualizzaRegistaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public ExecuteVisualizzaRegistaServlet() {
-        super();
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ExecuteVisualizzaRegistaServlet() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String idRegistaParam = request.getParameter("idRegista");
 
 		if (!NumberUtils.isCreatable(idRegistaParam)) {
@@ -52,6 +53,5 @@ public class ExecuteVisualizzaRegistaServlet extends HttpServlet {
 
 		request.getRequestDispatcher("/regista/show.jsp").forward(request, response);
 	}
-
 
 }

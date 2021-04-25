@@ -14,7 +14,6 @@ import it.prova.raccoltafilm.model.Regista;
 import it.prova.raccoltafilm.service.MyServiceFactory;
 import it.prova.raccoltafilm.service.RegistaService;
 
-
 @WebServlet("/PrepareDeleteRegistaServlet")
 public class PrepareDeleteRegistaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -28,44 +27,41 @@ public class PrepareDeleteRegistaServlet extends HttpServlet {
 
 		String idParameter = request.getParameter("idRegista");
 
-        RegistaService registaInstance = MyServiceFactory.getRegistaServiceInstance();
-        Regista result = null;
+		RegistaService registaInstance = MyServiceFactory.getRegistaServiceInstance();
+		Regista result = null;
 
-        if (!NumberUtils.isCreatable(idParameter)) {
+		if (!NumberUtils.isCreatable(idParameter)) {
 
-            request.setAttribute("errorMessage", "Attenzione si è verificato un errore.");
-            request.getRequestDispatcher("/regista/list.jsp").forward(request, response);
-            return;
-        }
+			request.setAttribute("errorMessage", "Attenzione si è verificato un errore.");
+			request.getRequestDispatcher("/regista/list.jsp").forward(request, response);
+			return;
+		}
 
-        try {
+		try {
 
-            if (!registaInstance.caricaSingoloElementoConFilms(Long.parseLong(idParameter)).getFilms()
-                    .isEmpty()) {
-                request.setAttribute("errorMessage",
-                        "Attenzione impossibile rimuovere un regista con dei film associati.");
-                request.setAttribute("registi_list_attribute",
-                        MyServiceFactory.getRegistaServiceInstance().listAllElements());
-               
-                response.sendRedirect("ExecuteListRegistaServlet?operationResult=ERROR");
-                return;
-            }
+			if (!registaInstance.caricaSingoloElementoConFilms(Long.parseLong(idParameter)).getFilms().isEmpty()) {
+				request.setAttribute("errorMessage",
+						"Attenzione impossibile rimuovere un regista con dei film associati.");
+				request.setAttribute("registi_list_attribute",
+						MyServiceFactory.getRegistaServiceInstance().listAllElements());
 
-        	
-            result = registaInstance.caricaSingoloElementoConFilms(Long.parseLong(idParameter));
+				response.sendRedirect("ExecuteListRegistaServlet?operationResult=ERROR");
+				return;
+			}
 
-        } catch (Exception e) {
+			result = registaInstance.caricaSingoloElementoConFilms(Long.parseLong(idParameter));
 
-            e.printStackTrace();
-            request.setAttribute("errorMessage", "Attenzione si è verificato un errore.");
-            request.getRequestDispatcher("/regista/search.jsp").forward(request, response);
-            return;
-        }
+		} catch (Exception e) {
 
-        request.setAttribute("regista_delete", result);
+			e.printStackTrace();
+			request.setAttribute("errorMessage", "Attenzione si è verificato un errore.");
+			request.getRequestDispatcher("/regista/search.jsp").forward(request, response);
+			return;
+		}
 
-       request.getRequestDispatcher("/regista/delete.jsp").forward(request, response);
+		request.setAttribute("regista_delete", result);
+
+		request.getRequestDispatcher("/regista/delete.jsp").forward(request, response);
 	}
-
 
 }

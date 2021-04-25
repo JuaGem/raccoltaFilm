@@ -1,6 +1,6 @@
 package it.prova.raccoltafilm.web.servlet.film;
 
-import java.io.IOException;	
+import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,59 +15,54 @@ import it.prova.raccoltafilm.utility.UtilityForm;
 @WebServlet("/ExecuteSearchFilmServlet")
 public class ExecuteSearchFilmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+			throws ServletException, IOException {
 
-        String titoloParam = request.getParameter("titolo");
-        String genereParam = request.getParameter("genere");
-        String durataParam = request.getParameter("minutiDurata");
-        String dataPubblicazioneParam = request.getParameter("dataPubblicazione");
-        String registaParam = request.getParameter("regista.id");
+		String titoloParam = request.getParameter("titolo");
+		String genereParam = request.getParameter("genere");
+		String durataParam = request.getParameter("minutiDurata");
+		String dataPubblicazioneParam = request.getParameter("dataPubblicazione");
+		String registaParam = request.getParameter("regista.id");
 
-        Film example = UtilityForm.createFilmFromParams(titoloParam, genereParam, durataParam, dataPubblicazioneParam,
-                registaParam);
+		Film example = UtilityForm.createFilmFromParams(titoloParam, genereParam, durataParam, dataPubblicazioneParam,
+				registaParam);
 
-        try {
-            request.setAttribute("film_list_attribute",
-                    MyServiceFactory.getFilmServiceInstance().findByExample(example));
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-            request.setAttribute("errorMessage", "Attenzione si è verificato un errore.");
-            request.getRequestDispatcher("/film/search.jsp").forward(request, response);
-            return;
-        }
-        request.getRequestDispatcher("/film/list.jsp").forward(request, response);
-    }
-	
-	 
+		try {
+			request.setAttribute("film_list_attribute",
+					MyServiceFactory.getFilmServiceInstance().findByExample(example));
 
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		 String titoloParam = request.getParameter("titolo");
-	        String genereParam = request.getParameter("genere");
-	        String durataParam = request.getParameter("minutiDurata");
-	        String dataPubblicazioneParam = request.getParameter("dataPubblicazione");
-	        String registaParam = request.getParameter("regista.id");
-
-	        UtilityForm.createFilmFromParams(titoloParam, genereParam, durataParam, dataPubblicazioneParam,
-	                registaParam);
-
-	        try {
-	            request.setAttribute("film_list_attribute",
-	                    MyServiceFactory.getFilmServiceInstance().listAllElements());
-	           
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	            request.setAttribute("errorMessage", "Attenzione si è verificato un errore.");
-	            request.getRequestDispatcher("/film/search.jsp").forward(request, response);
-	            return;
-	        }
-	        request.getRequestDispatcher("/film/list.jsp").forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("errorMessage", "Attenzione si è verificato un errore.");
+			request.getRequestDispatcher("/film/search.jsp").forward(request, response);
+			return;
+		}
+		request.getRequestDispatcher("/film/list.jsp").forward(request, response);
 	}
 
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String titoloParam = request.getParameter("titolo");
+		String genereParam = request.getParameter("genere");
+		String durataParam = request.getParameter("minutiDurata");
+		String dataPubblicazioneParam = request.getParameter("dataPubblicazione");
+		String registaParam = request.getParameter("regista.id");
+
+		UtilityForm.createFilmFromParams(titoloParam, genereParam, durataParam, dataPubblicazioneParam, registaParam);
+
+		try {
+			request.setAttribute("film_list_attribute", MyServiceFactory.getFilmServiceInstance().listAllElements());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("errorMessage", "Attenzione si è verificato un errore.");
+			request.getRequestDispatcher("/film/search.jsp").forward(request, response);
+			return;
+		}
+		request.getRequestDispatcher("/film/list.jsp").forward(request, response);
+	}
 
 }

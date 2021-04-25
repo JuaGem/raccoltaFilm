@@ -12,7 +12,6 @@ import org.apache.commons.lang3.math.NumberUtils;
 import it.prova.raccoltafilm.model.Regista;
 import it.prova.raccoltafilm.service.MyServiceFactory;
 
-
 @WebServlet("/ExecuteDeleteRegistaServlet")
 public class ExecuteDeleteRegistaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -24,7 +23,7 @@ public class ExecuteDeleteRegistaServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String idRegistaParam = request.getParameter("idDeleteInput");
-   
+
 		if (!NumberUtils.isCreatable(idRegistaParam)) {
 			request.setAttribute("errorMessage", "Attenzione, si è verificato un errore.");
 			request.getRequestDispatcher("automobile/search.jsp").forward(request, response);
@@ -36,7 +35,8 @@ public class ExecuteDeleteRegistaServlet extends HttpServlet {
 			Regista regista = MyServiceFactory.getRegistaServiceInstance()
 					.caricaSingoloElemento(Long.parseLong(idRegistaParam));
 			MyServiceFactory.getRegistaServiceInstance().rimuovi(regista);
-			request.setAttribute("listaRegistiAttribute", MyServiceFactory.getRegistaServiceInstance().listAllElements());
+			request.setAttribute("listaRegistiAttribute",
+					MyServiceFactory.getRegistaServiceInstance().listAllElements());
 			request.setAttribute("successMessage", "Operazione eseguita con successo!");
 
 		} catch (Exception e) {
@@ -50,4 +50,3 @@ public class ExecuteDeleteRegistaServlet extends HttpServlet {
 	}
 
 }
-

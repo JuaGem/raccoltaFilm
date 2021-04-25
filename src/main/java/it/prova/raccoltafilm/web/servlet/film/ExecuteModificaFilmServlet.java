@@ -12,20 +12,16 @@ import it.prova.raccoltafilm.model.Film;
 import it.prova.raccoltafilm.service.MyServiceFactory;
 import it.prova.raccoltafilm.utility.UtilityForm;
 
-
 @WebServlet("/ExecuteModificaFilmServlet")
 public class ExecuteModificaFilmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-  
-    public ExecuteModificaFilmServlet() {
-        super();
-    }
+
+	public ExecuteModificaFilmServlet() {
+		super();
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-
 
 		String idInputParam = request.getParameter("idEditInput");
 		String titoloParam = request.getParameter("titolo");
@@ -42,19 +38,19 @@ public class ExecuteModificaFilmServlet extends HttpServlet {
 		try {
 
 			if (!UtilityForm.validateFilmBean(filmInstance)) {
-			
+
 				request.setAttribute("edit_film_attribute", filmInstance);
-			
+
 				request.setAttribute("errorMessage", "Attenzione sono presenti errori di validazione");
 				request.getRequestDispatcher("/film/edit.jsp").forward(request, response);
-				return; 
-			} 
-			
+				return;
+			}
+
 			MyServiceFactory.getFilmServiceInstance().aggiorna(filmInstance);
- 
+
 			request.setAttribute("registi_list_attribute",
 					MyServiceFactory.getRegistaServiceInstance().listAllElements());
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("errorMessage", "Attenzione si è verificato un errore.");

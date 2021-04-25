@@ -16,13 +16,12 @@ public class PrepareSearchFilmServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		try {
 			// questo mi serve per la select di registi in pagina
 			request.setAttribute("registi_list_attribute",
 					MyServiceFactory.getRegistaServiceInstance().listAllElements());
-			
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("errorMessage", "Attenzione si è verificato un errore.");

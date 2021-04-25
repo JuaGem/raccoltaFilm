@@ -23,9 +23,8 @@ public class ExecuteDeleteFilmServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		String idFilmParameter = request.getParameter("idDeleteInput");
 
+		String idFilmParameter = request.getParameter("idDeleteInput");
 
 		if (!NumberUtils.isCreatable(idFilmParameter)) {
 
@@ -36,7 +35,8 @@ public class ExecuteDeleteFilmServlet extends HttpServlet {
 
 		try {
 
-			Film filmInstance = MyServiceFactory.getFilmServiceInstance().caricaSingoloElementoEager(Long.parseLong(idFilmParameter));
+			Film filmInstance = MyServiceFactory.getFilmServiceInstance()
+					.caricaSingoloElementoEager(Long.parseLong(idFilmParameter));
 			MyServiceFactory.getFilmServiceInstance().rimuovi(filmInstance);
 			request.setAttribute("film_list_attribute", MyServiceFactory.getFilmServiceInstance().listAllElements());
 			request.setAttribute("successMessage", "Operazione eseguita con successo!");

@@ -23,7 +23,7 @@ public class FilmServiceImpl implements FilmService {
 		EntityManager entityManager = LocalEntityManagerFactoryListener.getEntityManager();
 
 		try {
-			
+
 			filmDAO.setEntityManager(entityManager);
 
 			return filmDAO.list();
@@ -41,7 +41,7 @@ public class FilmServiceImpl implements FilmService {
 		EntityManager entityManager = LocalEntityManagerFactoryListener.getEntityManager();
 
 		try {
-			
+
 			filmDAO.setEntityManager(entityManager);
 
 			return filmDAO.findOne(id).get();
@@ -112,7 +112,8 @@ public class FilmServiceImpl implements FilmService {
 			filmDAO.setEntityManager(entityManager);
 
 			// eseguo quello che realmente devo fare
-			// grazie al fatto che il regista ha un id viene eseguito il merge automaticamente
+			// grazie al fatto che il regista ha un id viene eseguito il merge
+			// automaticamente
 			// se quell'id non ha un corrispettivo in tabella viene lanciata una eccezione
 			filmDAO.insert(filmInstance);
 
